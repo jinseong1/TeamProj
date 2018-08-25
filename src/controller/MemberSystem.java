@@ -20,6 +20,11 @@ import model.MemberDTO;
 @Controller
 public class MemberSystem{
 	
+	
+	@Resource(name="dataSourceByJNDI")
+	private DataSource dataSourceJNDI;
+	
+	
 	@RequestMapping("/Control/SingUpForm.do")
 	public String singupform()throws Exception{//회원가입 눌렀을 시
 		return "/SingUP/SingUP.jsp";
@@ -37,7 +42,7 @@ public class MemberSystem{
 		dto.setTel(map.get("UserTEL").toString());
 		dto.setLifeaAgePlan(map.get("UserlifeaAgePlan").toString());
 		
-		DAO dao = new DAO();
+		DAO dao = new DAO(dataSourceJNDI);
 		
 		affected = dao.insert(dto);
 		
@@ -68,29 +73,7 @@ public class MemberSystem{
 		
 		return "/InSite/NoticeBoard.jsp";
 	}
-	
-	
-	//데이타 소스를 자동으로 주입 받기 위한(와이어링) 멤버변수(속성) 선언]
-	@Resource(name="dataSourceByJDBC")
-	private DataSource dataSourceJDBC;
-	
-	@Resource(name="dataSourceByJNDI")
-	private DataSource dataSourceJNDI;
-	
-	
-	
-	@RequestMapping("/Control/JDBCConnection.do")
-	public String jdbc(@RequestParam String method,Model model) throws Exception{
-		//주입받은 DataSource객체로 Connection객체 얻기]
-		Connection conn=dataSourceJDBC.getConnection();
-		//데이타 저장]
-		model.addAttribute("message",conn==null ? "[데이타베이스 연결 실패]" : "[데이타베이스 연결 성공]" );
-		//커넥션 객체 메모리 해제
-		if(conn !=null) conn.close();
-		//뷰정보 반환]
-		return "/Database08/Database.jsp";
-	}/////////////
-	
+	/*
 	@RequestMapping("/Control/JNDIConnection.do")
 	public String jndi(@RequestParam String method,Model model) throws Exception{
 		//주입받은 DataSource객체로 Connection객체 얻기]
@@ -102,5 +85,5 @@ public class MemberSystem{
 		//뷰정보 반환]
 		return "/Database08/Database.jsp";
 	}/////////////
-	
+	*/
 }

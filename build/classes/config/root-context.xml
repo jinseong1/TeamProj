@@ -15,11 +15,11 @@
 		    설정은 의미 없다.
 	 --> 	
 	<!--  DataSource using Spring JDBC -->
-	<bean id="dataSourceByJDBC" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
-		<property name="username" value="SAMPLE"/>
-		<property name="password" value="SAMPLE"/>
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSourceByJDBC">
+		<property value="oracle.jdbc.OracleDriver" name="driverClassName"/>
+		<property value="jdbc:oracle:thin:@localhost:1521:orcl" name="url"/>
+		<property value="SAMPLE" name="username"/>
+		<property value="SAMPLE" name="password"/>
 	</bean>
 	<!-- 스프링의 JNDI사용(커넥션 풀 사용) -->  	
 	<!--  DataSource using Spring JNDI -->

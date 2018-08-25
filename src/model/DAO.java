@@ -19,11 +19,9 @@ public class DAO {
 	private PreparedStatement psmt;
 	private ResultSet rs;
 	
-	@Resource(name="dataSourceByJNDI")
-	private DataSource dataSourceJNDI;
 	
 	//톰캣이 만들어 놓은 커넷션을 커넥션 풀에서 가져다 쓰기]
-	public DAO() {
+	public DAO(DataSource dataSourceJNDI) {
 		//주입받은 DataSource객체로 Connection객체 얻기]
 		try {
 			conn = dataSourceJNDI.getConnection();
@@ -33,6 +31,8 @@ public class DAO {
 			e.printStackTrace();
 		}
 	}//////////////
+
+
 
 
 	//자원 반납용]-사용한 커넥션 개체를 다시 풀에 반납
