@@ -7,10 +7,9 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>WebContent/WEB-INF/Spring/config/FrontController-servlet.xml</config>
+		<config>WebContent/WEB-INF/Spring/config/FrontController.xml</config>
 	</configs>
 	<autoconfigs>
-		<config>src/config/root-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
