@@ -57,8 +57,25 @@ public class MemberSystem{
 	
 	
 	@RequestMapping("/Control/MainMove.do")
-	public String mainMove()throws Exception{//Main화면으로 이동
-		return "/InSite/Main.jsp";
+	public String mainMove(@RequestParam Map map)throws Exception{//Main화면으로 이동
+		int affected;
+		MemberDTO dto = new MemberDTO();
+		
+		dto.setId(map.get("UserID").toString());
+		dto.setPassword(map.get("UserPWD").toString());
+		
+		DAO dao = new DAO(dataSourceJNDI);
+		
+		affected=dao.selectOne(dto);
+		
+		if(affected==1) {//로그인 성공
+			return "/InSite/Main.jsp";
+		}
+		else {//로그인 실패
+			return "/Login/Login.jsp";
+		}
+		
+		
 	}
 	
 	@RequestMapping("/Control/Logout.do")

@@ -65,5 +65,18 @@ public class DAO {
 		return affected;
 	}////insert
 	
+	public int selectOne(MemberDTO dto) {
+		int affected=0;
+		String sql = "SELECT * FROM MEMBERS WHERE ID=? AND PASSWORD=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getPassword());
+			affected=psmt.executeUpdate();
+		}
+		catch (Exception e) {e.printStackTrace();}
+		
+		return affected;
+	}
 	
 }

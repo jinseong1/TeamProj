@@ -36,12 +36,12 @@
 			<h2>ParkJinSeong</h2>
 			<p>Please enter your email and password</p>
 			</div>
-				<form id="Login" action="<c:url value="/Control/Main.do"/>">
+				<form id="Login" action="<c:url value="/Control/MainMove.do"/>">
 				<div class="form-group">
-					<input type="text" class="form-control" id="UserID" placeholder="아이디를 입력하여주세요">
+					<input type="text" class="form-control" id="UserID" name="UserID" placeholder="아이디를 입력하여주세요">
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" id="UserPWD" placeholder="비밀번호를 입력하여주세요">
+					<input type="password" class="form-control" id="UserPWD" name="UserPWD" placeholder="비밀번호를 입력하여주세요">
 				</div>
 				<div class="forgot">
 					<a href="<c:url value="/Control/SingUpForm.do"/>">회원가입 하시겠습니까?</a>
