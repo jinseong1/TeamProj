@@ -43,13 +43,17 @@
 					<div class="form-group">
 						<input type="password" class="form-control" id="UserPWD" placeholder="가입하실 비밀번호 입력">
 					</div>
-					<div class="form-group">
-						남자<input type="radio" id="UserGENDER" value="남자" name="gender">
-						여자<input type="radio" id="UserGENDER" value="여자" name="gender">
-					</div>
+
 					<div class="form-group">
 						<input type="text" class="form-control" id="UserNAME" placeholder="가입하실 이름 입력">
 					</div>
+					<div class="form-group">
+						남자<input type="radio" id="UserGENDER" value="남자" name="gender">
+						여자<input type="radio" id="UserGENDER" value="여자" name="gender">
+					</div>	
+					<div class="form-group">
+						<input type="text" class="form-control" id="UserTEL" placeholder="가입하실 연락처 입력">
+					</div>					
 					<div class="form-group">
 						<input type="date" class="form-control" id="UserAGE" placeholder="가입하실 나이 입력">
 					</div>							
