@@ -38,10 +38,10 @@
 			</div>
 				<form id="Login" action="<c:url value="/Control/Main.do"/>">
 				<div class="form-group">
-					<input type="email" class="form-control" id="UserID" placeholder="Email Address">
+					<input type="text" class="form-control" id="UserID" placeholder="아이디를 입력하여주세요">
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" id="UserPWD" placeholder="Password">
+					<input type="password" class="form-control" id="UserPWD" placeholder="비밀번호를 입력하여주세요">
 				</div>
 				<div class="forgot">
 					<a href="<c:url value="/Control/SingUpForm.do"/>">회원가입 하시겠습니까?</a>
