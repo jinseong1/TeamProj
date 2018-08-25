@@ -7,6 +7,7 @@ public class MemberDTO {
 	private String gender;
 	private String tel;
 	private String LifeaAgePlan;
+	
 	public String getId() {
 		return id;
 	}

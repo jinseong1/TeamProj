@@ -25,7 +25,7 @@
     <script src="<c:url value='/Bootstrap/js/bootstrap.min.js'/>"></script>
     
 	<link rel="stylesheet" href="../BasicCSS/LoginForm.css" type="text/css" />
-    
+
   </head>
 <body id="LoginForm">
 	<div class="container">
@@ -36,28 +36,27 @@
 			<h2>ParkJinSeong</h2>
 			<p>Please enter your Sing Up Member Information</p>
 			</div>
-				<form id="SingUP" action="<c:url value="/Control/SingUp.do"/>" method="post">
+				<form id="SingUP" action="<c:url value="/Control/SingUp.do"/>">
 					<div class="form-group">
-						<input type="email" class="form-control" id="UserID" placeholder="가입하실 아이디 입력">
+						<input type="text" class="form-control" id="UserID" name="UserID" placeholder="가입하실 아이디 입력"/>
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control" id="UserPWD" placeholder="가입하실 비밀번호 입력">
+						<input type="password" class="form-control" id="UserPWD" name="UserPWD" placeholder="가입하실 비밀번호 입력"/>
 					</div>
 
 					<div class="form-group">
-						<input type="text" class="form-control" id="UserNAME" placeholder="가입하실 이름 입력">
+						<input type="text" class="form-control" id="UserNAME" name="UserNAME" placeholder="가입하실 이름 입력"/>
 					</div>
 					<div class="form-group">
-						남자<input type="radio" id="UserGENDER" value="남자" name="gender">
-						여자<input type="radio" id="UserGENDER" value="여자" name="gender">
+						남자<input type="radio" id="UserGENDER" value="남자" name="gender"/>
+						여자<input type="radio" id="UserGENDER" value="여자" name="gender"/>
 					</div>	
 					<div class="form-group">
-						<input type="text" class="form-control" id="UserTEL" placeholder="가입하실 연락처 입력">
+						<input type="text" class="form-control" id="UserTEL" name="UserTEL" placeholder="가입하실 연락처 입력"/>
 					</div>					
 					<div class="form-group">
-						<input type="date" class="form-control" id="UserAGE" placeholder="가입하실 나이 입력">
+						<input type="date" class="form-control" id="UserlifeaAgePlan" name="UserlifeaAgePlan" placeholder="가입하실 나이 입력"/>
 					</div>							
-						<input type="hidden" name="Sings" value="YES">
 						<button type="submit" class="btn btn-primary">회원가입 완료</button>
 				</form>
 			</div>

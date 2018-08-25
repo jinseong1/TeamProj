@@ -26,7 +26,19 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   
-
+  
+  <context-param>
+  	<param-name>ORACLE_URL</param-name>
+  	<param-value>jdbc:oracle:thin:@localhost:1521:orcl</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>ORACLE_DRIVER</param-name>
+  	<param-value>oracle.jdbc.OracleDriver</param-value>
+  </context-param>  
+  <context-param>
+  	<param-name>JNDI_ROOT</param-name>
+  	<param-value>java:comp/env</param-value>
+  </context-param>
   
   
   
