@@ -21,6 +21,7 @@
 	     	 <ul class="nav navbar-nav navbar-right">
 	     	 	<li><a href="<c:url value="/Control/Main.do"/>">HOME</a></li>
        			<li><a href="<c:url value="/Control/NoticeBoard.do?nowPage=1"/>">게시판</a></li>
+        		<li><a href="<c:url value="/Control/MyPage.do"/>">마이페이지</a></li>      			
        			<li><a href="<c:url value="/Control/Logout.do"/>">로그아웃</a></li> 
 	     	 </ul>
 	     </div>

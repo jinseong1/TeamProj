@@ -34,63 +34,41 @@
   </head>
   <body>
 	<jsp:include page="/BasicCSS/InSiteForm.jsp"/>
-	 
-	
-			<div class="container" >
+	 		<div class="container" >
 			<div class = "page-header">
-	   			<h1>게시판  <small>상세보기 페이지</small></h1>
+	   			<h1>자료실  <small>입력폼</small></h1>
 			</div>
-				
 			<div class="row">
-				<!-- 테이블 전체 가로폭은  테이블을 감싸는 div의 col-*-*로 조정-->
-				<div class="col-md-11">
-			    	<table class="table table-hover table-striped table-bordered ">
-			    		<tr>
-			    			<th class="col-md-2 text-center">번호</th>
-			    			<td>${list.no }</td>
-			    		</tr>
-			    		<tr>
-			    			<th class="col-md-2 text-center">제목</th>
-			    			<td>${list.title }</td>
-			    		</tr>
-			    		<tr>
-			    			<th class="col-md-2 text-center">작성자</th>
-			    			<td>${list.id }</td>
-			    		</tr>
-			    		<tr>
-			    			<th class="col-md-2 text-center">조회수</th>
-			    			<td>${list.downcount }</td>
-			    		</tr>
-			    		<tr>
-			    			<th class="col-md-2 text-center">등록일</th>
-			    			<td>${list.postdate }</td>
-			    		</tr>
-			    		<tr>
-			    			<th colspan="2" class="text-center">내용</th>			    			
-			    		</tr>
-			    		<tr>
-			    			<td colspan="2">
-			    				${list.content}
-			    			</td>			    			
-			    		</tr>
-			    		
-			    	</table>
-		    	</div>	
-			</div><!-- row -->
-			<div class="row">
-				<div class="col-md-11">	
-					<!-- .center-block사용시 해당 블락의 크기를 지정하자  -->
-			    	<ul id="tabMenu" class="nav nav-pills center-block" style="width:195px">
-					  <li><a href="<c:url value="/Control/UpdateMove.do?title=${list.title}&content=${list.content}&nowPage=${nowPage}&no=${list.no}"/>">수정</a></li>
-					  <li><a href="<c:url value='/Control/Delete.do?no=${list.no}'/>">삭제</a></li>
-					  
-					  <li><a href="<c:url value='/Control/NoticeBoard.do?nowPage=${nowPage}'/>">목록</a></li>
-					</ul>
-			    </div>	
-			</div>
+				<div class="col-md-12">
+					<form class="form-horizontal" method="post" action="<c:url value='/Control/Update.do?nowPage=${nowPage}&no=${no}'/>">
+					  <div class="form-group">
+					    <label for="name" class="col-sm-2 control-label">작성자</label>
+					    <div class="col-sm-3">
+					       ${userID}
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="title" class="col-sm-2 control-label">제목</label>
+					    <div class="col-sm-5">
+					      <input type="text" class="form-control" id="title" name="title" value="${title}">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="content" class="col-sm-2 control-label">내용</label>
+					    <div class="col-sm-5">
+						    <textarea rows="10" type="text" class="form-control" id="content" name="content" >${content}</textarea>
+					    </div>
+					  </div>
+					   <div class="form-group">
+					    <div class="col-sm-offset-2 col-sm-10">
+					      <button type="submit" class="btn btn-danger">등록</button>
+					    </div>
+					  </div>
+					</form>
+				</div>
+			</div>	
 		</div>
-	
-	
+
     
   </body>
 </html>

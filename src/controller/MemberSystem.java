@@ -239,4 +239,89 @@ public class MemberSystem{
 		}
 	}
 	
+	
+	@RequestMapping("/Control/UpdateMove.do")
+	public String updateMove(@RequestParam Map map, Model model)throws Exception{//수정페이지로 이동
+		
+		model.addAllAttributes(map);
+		
+		return "/InSite/Update.jsp";
+	}
+	
+	
+	
+	@RequestMapping("/Control/Update.do")
+	public String update(@RequestParam Map map)throws Exception{//글 수정용
+		
+		int affected;
+		String nowPage = map.get("nowPage").toString();
+		DAO dao = new DAO(dataSourceJNDI);
+		
+		PostDTO dto = new PostDTO();
+		
+		dto.setNo(map.get("no").toString());
+		
+		dto.setTitle(map.get("title").toString());
+		
+		dto.setContent(map.get("content").toString());
+		
+		affected=dao.updatePost(dto);
+		
+		dao.close();
+		
+		if(affected==1) {//입력 성공시
+			return "/Control/ViewMove.do?nowPage="+nowPage;
+		}
+		else {//입력 실패시
+			return "/InSite/Write.jsp";
+		}
+	}	
+	
+	@RequestMapping("/Control/MyPage.do")
+	public String myPageMove()throws Exception{//MyPage로 이동
+		
+		return "/InSite/MyPage.jsp";
+	}
+	
+	
+	
+	@RequestMapping("/Control/MemberUpdate.do")
+	public String memberUpdate(@RequestParam Map map)throws Exception{//회원정보 수정
+		int affected;
+		
+		DAO dao = new DAO(dataSourceJNDI);
+		
+		MemberDTO dto = new MemberDTO();
+		System.out.println("id"+map.get("id").toString());
+		System.out.println("name"+map.get("name").toString());
+		System.out.println("gender"+map.get("gender").toString());
+		System.out.println("tel"+map.get("tel").toString());
+		System.out.println("생년월일"+map.get("userlifeaAgePlan").toString());
+		
+		
+		dto.setId(map.get("id").toString());
+		dto.setName(map.get("name").toString());
+		dto.setGender(map.get("gender").toString());
+		dto.setTel(map.get("tel").toString());
+		dto.setLifeaAgePlan(map.get("userlifeaAgePlan").toString());
+		
+		System.out.println("수정 커리문 후");
+		affected=dao.memberUpdate(dto);
+		System.out.println("affected"+affected);
+		System.out.println("수정 커리 문 다음");
+		if(affected==1) {
+			System.out.println("수정 성공");
+			return"/Login/Login.jsp";
+		}
+		else {
+			System.out.println("수정 실패");
+			return"/InSite/MyPage.jsp";
+		}
+	}
+	
+	
+	
+	
+	
+	
 }

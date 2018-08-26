@@ -173,6 +173,26 @@ public class DAO {
 		return affected;
 	}////insert
 	
+	
+	public int updatePost(PostDTO dto) {//글 수정
+		int affected=0;
+		String sql = "UPDATE POST SET TITLE=?, CONTENT=? WHERE NO=?";
+		try {			
+			psmt= conn.prepareStatement(sql);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getNo());
+			
+			affected=psmt.executeUpdate();
+		}
+		catch(SQLException e) {e.printStackTrace();}
+		
+		return affected;
+	}////insert
+	
+	
+	
+	
 	public int delete(PostDTO dto) {//삭제
 		int affected=0;
 		String sql = "DELETE FROM POST WHERE NO=?";
@@ -187,6 +207,25 @@ public class DAO {
 		
 		return affected;
 	}////insert
+
+
+	public int memberUpdate(MemberDTO dto) {//회원수정용
+		int affected=0;
+		System.out.println("커리문 안에 들어옴");
+		String sql = "UPDATE MEMBERS SET NAME=?, GENDER=?, TEL=?, LIFEAAGEPLAN=? WHERE ID=?";
+		try {			
+			psmt= conn.prepareStatement(sql);
+			psmt.setString(1, dto.getName());
+			psmt.setString(2, dto.getGender());
+			psmt.setString(3, dto.getTel());
+			psmt.setString(4, dto.getLifeaAgePlan());
+			psmt.setString(5, dto.getId());
+			affected=psmt.executeUpdate();
+		}		
+		catch(SQLException e) {e.printStackTrace();}
+		
+		return affected;
+	}
 	
 	
 }
