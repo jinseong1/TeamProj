@@ -227,5 +227,18 @@ public class DAO {
 		return affected;
 	}
 	
+	public void updateDownloadCount(String no) {
+		String sql="UPDATE POST SET downcount = downcount+1 WHERE no=?";
+		try {
+			psmt= conn.prepareStatement(sql);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 }

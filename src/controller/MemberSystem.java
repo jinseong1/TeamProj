@@ -245,7 +245,7 @@ public class MemberSystem{
 		PostDTO dto = new PostDTO();
 		
 		dto.setNo(no);
-		
+		dao.updateDownloadCount(no);
 		dto=dao.selectOnePost(dto);
 		
 		model.addAttribute("list",dto);

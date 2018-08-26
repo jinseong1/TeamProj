@@ -15,7 +15,7 @@ CREATE TABLE MEMBERS
 	PassWord nvarchar2(20) NOT NULL,
 	Name nvarchar2(10) NOT NULL,
 	Gender nvarchar2(10) NOT NULL,
-	Tel number NOT NULL,
+	Tel nvarchar2(15) NOT NULL,
 	LifeaAgePlan nvarchar2(15) NOT NULL,
 	PRIMARY KEY (ID)
 );
@@ -28,6 +28,7 @@ CREATE TABLE POST
 	TITLE nvarchar2(50) NOT NULL,
 	POSTDATE date DEFAULT SYSDATE NOT NULL,
 	CONTENT nvarchar2(1000) NOT NULL,
+	DOWNCOUN NUMBER,
 	PRIMARY KEY (NO)
 );
 
