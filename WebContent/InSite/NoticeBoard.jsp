@@ -27,8 +27,10 @@
     <link href="<c:url value="/BasicCSS/AllCSS.jsp"/>" rel="stylesheet"/>
     <style type="text/css">
     .container{
-    margin-top: 70px;    
+    margin-top: 70px;
+    margin-bottom: 500px
     }
+    
     #in {
 	  position:absolute;
 	  top:50%;
@@ -86,5 +88,6 @@
 		</div>
     
     <!-- 내용 끝 -->
+    	<jsp:include page="/BasicCSS/Footer.jsp"/>
   </body>
 </html>

@@ -28,7 +28,7 @@
     <style type="text/css">
     .container{
     margin-top: 70px;
-    
+    margin-bottom: 500px
     }
     </style>
   </head>
@@ -69,6 +69,6 @@
 			</div>	
 		</div>
 
-    
+    	<jsp:include page="/BasicCSS/Footer.jsp"/>
   </body>
 </html>

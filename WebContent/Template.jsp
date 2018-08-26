@@ -31,6 +31,6 @@
 	<jsp:include page="/BasicCSS/InSiteForm.jsp"/>
 	 
 
-    
+    <jsp:include page="/BasicCSS/Footer.jsp"/>
   </body>
 </html>

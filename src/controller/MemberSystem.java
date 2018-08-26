@@ -115,7 +115,7 @@ public class MemberSystem{
 		//전체 레코드 수
 		int totalRecordCount = dao.getTotalRecordCount();
 		//페이지 사이즈
-		int pageSize =5;
+		int pageSize = 10;
 		//블락 페이지
 		int blockPage = 3;
 		//전체페이지 수
