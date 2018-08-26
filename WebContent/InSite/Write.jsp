@@ -56,7 +56,7 @@
 					  <div class="form-group">
 					    <label for="content" class="col-sm-2 control-label">내용</label>
 					    <div class="col-sm-5">
-						    <textarea rows="10" type="password" class="form-control" id="content" name="content" placeholder="비밀번호를 입력하세요"></textarea>
+						    <textarea rows="10" type="text" class="form-control" id="content" name="content" placeholder="내용를 입력하세요"></textarea>
 					    </div>
 					  </div>
 					   <div class="form-group">

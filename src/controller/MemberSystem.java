@@ -19,6 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import model.DAO;
 import model.MemberDTO;
+import model.PagingUtil;
 import model.PostDTO;
 
 @Controller
@@ -108,7 +109,7 @@ public class MemberSystem{
 	
 	
 	@RequestMapping("/Control/NoticeBoard.do")
-	public String noticeBoard(@RequestParam int nowPage,Map map)throws Exception{//게시판으로 이동
+	public String noticeBoard(@RequestParam int nowPage,Map map, HttpServletRequest req)throws Exception{//게시판으로 이동
 		Map rownum = new HashMap();
 		DAO dao = new DAO(dataSourceJNDI);
 		//전체 레코드 수
@@ -120,7 +121,19 @@ public class MemberSystem{
 		//전체페이지 수
 		int totalPage = (int)Math.ceil(((double)totalRecordCount/pageSize));
 		
-
+		
+		String pagingString = PagingUtil.pagingBootStrapStyle(
+				totalRecordCount, 
+				pageSize, 
+				blockPage, 
+				nowPage, 
+				req.getContextPath()+"/Control/NoticeBoard.do?");
+		
+		map.put("pagingString", pagingString);
+		map.put("totalRecordCount", totalRecordCount);
+		map.put("nowPage", nowPage);
+		map.put("pageSize", pageSize);
+		
 		//시작 및 끝 rownum구하기]
 		int start =(nowPage-1)*pageSize+1;
 		int end = nowPage*pageSize;
@@ -135,7 +148,7 @@ public class MemberSystem{
 		map.put("list", list);
 		
 		
-		return "/InSite/NoticeBoard.jsp";
+		return "/InSite/NoticeBoard.jsp?nowPage="+nowPage;
 	}
 
 	
@@ -168,7 +181,7 @@ public class MemberSystem{
 		dao.close();
 		
 		if(affected==1) {//입력 성공시
-			return "/Control/NoticeBoard.do";
+			return "/Control/NoticeBoard.do?nowPage=1";
 		}
 		else {//입력 실패시
 			return "/InSite/Write.jsp";
@@ -179,7 +192,10 @@ public class MemberSystem{
 	public String viewMove(@RequestParam Map map, Model model)throws Exception{//상세보기 이동용
 		
 		String no = map.get("no").toString();
-		System.out.println("no : "+no);
+		String nowPage = map.get("nowPage").toString();		
+		
+		
+		
 		DAO dao = new DAO(dataSourceJNDI);
 		
 		PostDTO dto = new PostDTO();
@@ -189,12 +205,38 @@ public class MemberSystem{
 		dto=dao.selectOnePost(dto);
 		
 		model.addAttribute("list",dto);
+		model.addAttribute("nowPage", nowPage);
 		
 		dao.close();
 		
 			return "/InSite/View.jsp?no="+no;
 	}
 	
-	
+	@RequestMapping("/Control/Delete.do")
+	public String delete(@RequestParam Map map, HttpSession session)throws Exception{//삭제용
+		
+		int affected;
+		
+		DAO dao = new DAO(dataSourceJNDI);
+		
+		PostDTO dto = new PostDTO();
+		
+		String no = map.get("no").toString();
+		
+		System.out.println(no);
+		
+		dto.setNo(no);
+		
+		affected=dao.delete(dto);
+		
+		dao.close();
+		
+		if(affected==1) {//삭제 성공시
+			return "/Control/NoticeBoard.do?nowPage=1";
+		}
+		else {//삭제 실패시
+			return "/InSite/View.jsp?no="+no;
+		}
+	}
 	
 }

@@ -27,10 +27,17 @@
     <link href="<c:url value="/BasicCSS/AllCSS.jsp"/>" rel="stylesheet"/>
     <style type="text/css">
     .container{
-    margin-top: 70px;
-    
+    margin-top: 70px;    
     }
-    
+    #in {
+	  position:absolute;
+	  top:50%;
+	  left:50%;
+	  width:100px;
+	  height:100px;
+	  background:#f00;
+	  margin:-50px 0 0 -50px;
+	 }
     
     </style>
   </head>
@@ -63,7 +70,7 @@
 			    		<c:forEach items="${list}" var="record" varStatus="loop">
 			    		<tr>
 			    			<td>${record.no}</td>
-			    			<td class="text-left"><a href='<c:url value="/Control/ViewMove.do?no=${record.no}"/>'>${record.title}</a></td>
+			    			<td class="text-left"><a href='<c:url value="/Control/ViewMove.do?no=${record.no}&nowPage=${nowPage}"/>'>${record.title}</a></td>
 			    			<td>${record.id}</td>
 			    			<td>${record.downcount}</td>
 			    			<td>${record.postdate}</td>
@@ -72,7 +79,10 @@
 			    	</table>
 		    	</div>	
 			</div>
-
+			<!-- 페이징 처리 부분 -->
+			${pagingString}
+			<!-- 페이징 처리 부분 -->
+			
 		</div>
     
     <!-- 내용 끝 -->

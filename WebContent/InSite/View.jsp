@@ -83,8 +83,9 @@
 			    	<ul id="tabMenu" class="nav nav-pills center-block" style="width:195px">
 					  <li><a href="#" data-toggle="modal" data-target="#passwordModal">수정</a></li>
 					  <!-- 삭제 취소시에는 모달창이 뜨지 않도록 자스로 제어하기 위해: data-toggle="modal" 삭제 -->
-					  <li><a href="#" data-target="/Control/Delete.do">삭제</a></li>
-					  <li><a href="<c:url value='/Control/NoticeBoard.do'/>">목록</a></li>
+					  <li><a href="<c:url value='/Control/Delete.do?no=${list.no}'/>">삭제</a></li>
+					  
+					  <li><a href="<c:url value='/Control/NoticeBoard.do?nowPage=${nowPage}'/>">목록</a></li>
 					</ul>
 			    </div>	
 			</div>

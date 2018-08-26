@@ -36,8 +36,6 @@ public class DAO {
 	}//////////////
 
 
-
-
 	//자원 반납용]-사용한 커넥션 개체를 다시 풀에 반납
 	public void close() {
 		try {
@@ -158,7 +156,7 @@ public class DAO {
 	}////////selectList()
 	
 	
-	public int insertPost(PostDTO dto) {//회원가입
+	public int insertPost(PostDTO dto) {//글등록
 		int affected=0;
 		String sql = "INSERT INTO POST VALUES(SEQ_POST_NO.nextval,?,?,SYSDATE,?,?)";
 		try {			
@@ -167,6 +165,21 @@ public class DAO {
 			psmt.setString(2, dto.getTitle());
 			psmt.setString(3, dto.getContent());
 			psmt.setInt(4, 0);
+			
+			affected=psmt.executeUpdate();
+		}
+		catch(SQLException e) {e.printStackTrace();}
+		
+		return affected;
+	}////insert
+	
+	public int delete(PostDTO dto) {//삭제
+		int affected=0;
+		String sql = "DELETE FROM POST WHERE NO=?";
+		try {			
+			psmt= conn.prepareStatement(sql);
+			
+			psmt.setString(1, dto.getNo());
 			
 			affected=psmt.executeUpdate();
 		}
