@@ -25,7 +25,12 @@
     <script src="<c:url value='/Bootstrap/js/bootstrap.min.js'/>"></script>
     
     <link href="<c:url value="/BasicCSS/AllCSS.jsp"/>" rel="stylesheet"/>
+    <style type="text/css">
+    .container{
+    margin-top: 70px;
     
+    }
+    </style>
   </head>
   <body>
 	<jsp:include page="/BasicCSS/InSiteForm.jsp"/>
@@ -33,7 +38,7 @@
 	
 			<div class="container" >
 			<div class = "page-header">
-	   			<h1>자료실  <small>상세보기 페이지</small></h1>
+	   			<h1>게시판  <small>상세보기 페이지</small></h1>
 			</div>
 				
 			<div class="row">
@@ -42,30 +47,30 @@
 			    	<table class="table table-hover table-striped table-bordered ">
 			    		<tr>
 			    			<th class="col-md-2 text-center">번호</th>
-			    			<td>${record.no }</td>
+			    			<td>${list.no }</td>
 			    		</tr>
 			    		<tr>
 			    			<th class="col-md-2 text-center">제목</th>
-			    			<td>${record.title }</td>
+			    			<td>${list.title }</td>
 			    		</tr>
 			    		<tr>
 			    			<th class="col-md-2 text-center">작성자</th>
-			    			<td>${record.name }</td>
+			    			<td>${list.id }</td>
 			    		</tr>
 			    		<tr>
 			    			<th class="col-md-2 text-center">조회수</th>
-			    			<td>${record.downcount }</td>
+			    			<td>${list.downcount }</td>
 			    		</tr>
 			    		<tr>
 			    			<th class="col-md-2 text-center">등록일</th>
-			    			<td>${record.postdate }</td>
+			    			<td>${list.postdate }</td>
 			    		</tr>
 			    		<tr>
 			    			<th colspan="2" class="text-center">내용</th>			    			
 			    		</tr>
 			    		<tr>
 			    			<td colspan="2">
-			    				${record.content}
+			    				${list.content}
 			    			</td>			    			
 			    		</tr>
 			    		
@@ -78,8 +83,8 @@
 			    	<ul id="tabMenu" class="nav nav-pills center-block" style="width:195px">
 					  <li><a href="#" data-toggle="modal" data-target="#passwordModal">수정</a></li>
 					  <!-- 삭제 취소시에는 모달창이 뜨지 않도록 자스로 제어하기 위해: data-toggle="modal" 삭제 -->
-					  <li><a href="#" data-target="#passwordModal">삭제</a></li>
-					  <li><a href="<c:url value='/DataRoom/List.kosmo'/>">목록</a></li>
+					  <li><a href="#" data-target="/Control/Delete.do">삭제</a></li>
+					  <li><a href="<c:url value='/Control/NoticeBoard.do'/>">목록</a></li>
 					</ul>
 			    </div>	
 			</div>

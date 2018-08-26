@@ -82,6 +82,34 @@ public class DAO {
 		return affected;
 	}
 	
+	public PostDTO selectOnePost(PostDTO dto) {
+		String sql = "SELECT * FROM POST WHERE NO=?";
+		
+		try {
+			
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, dto.getNo());
+			
+			rs= psmt.executeQuery();
+			
+			while(rs.next()) {
+				dto.setNo(rs.getString(1));
+				dto.setId(rs.getString(2));
+				dto.setTitle(rs.getString(3));
+				dto.setPostdate(rs.getString(4));
+				dto.setContent(rs.getString(5));
+				dto.setDowncount(rs.getString(6));
+			}///while
+			
+		}
+		
+		catch (Exception e) {e.printStackTrace();}
+		
+		return dto;
+	}
+	
+	
 	//전체 레코드 수 얻기용- 페이징
 	public int getTotalRecordCount() {
 		int totalCount=0;

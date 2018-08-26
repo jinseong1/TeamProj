@@ -30,8 +30,6 @@
     margin-top: 70px;
     
     }
-    
-    
     </style>
   </head>
   <body>

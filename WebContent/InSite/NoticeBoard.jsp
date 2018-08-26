@@ -63,7 +63,7 @@
 			    		<c:forEach items="${list}" var="record" varStatus="loop">
 			    		<tr>
 			    			<td>${record.no}</td>
-			    			<td class="text-left">${record.title}</td>
+			    			<td class="text-left"><a href='<c:url value="/Control/ViewMove.do?no=${record.no}"/>'>${record.title}</a></td>
 			    			<td>${record.id}</td>
 			    			<td>${record.downcount}</td>
 			    			<td>${record.postdate}</td>

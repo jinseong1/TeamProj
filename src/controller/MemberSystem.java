@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -148,7 +149,7 @@ public class MemberSystem{
 	
 	
 	@RequestMapping("/Control/WriteEnd.do")
-	public String writeEnd(@RequestParam Map map, HttpSession session)throws Exception{
+	public String writeEnd(@RequestParam Map map, HttpSession session)throws Exception{//글등록 완료용
 		
 		int affected;
 		
@@ -156,8 +157,8 @@ public class MemberSystem{
 		
 		PostDTO dto = new PostDTO();
 		
-		dto.setId(session.getId());
-		
+		dto.setId(session.getAttribute("userID").toString());
+		System.out.println(session.getId());
 		dto.setTitle(map.get("title").toString());
 		
 		dto.setContent(map.get("content").toString());
@@ -166,12 +167,32 @@ public class MemberSystem{
 		
 		dao.close();
 		
-		if(affected==1) {
-			return "/InSite/NoticeBorad.jsp";
+		if(affected==1) {//입력 성공시
+			return "/Control/NoticeBoard.do";
 		}
-		else {
+		else {//입력 실패시
 			return "/InSite/Write.jsp";
 		}
+	}
+	
+	@RequestMapping("/Control/ViewMove.do")
+	public String viewMove(@RequestParam Map map, Model model)throws Exception{//상세보기 이동용
+		
+		String no = map.get("no").toString();
+		System.out.println("no : "+no);
+		DAO dao = new DAO(dataSourceJNDI);
+		
+		PostDTO dto = new PostDTO();
+		
+		dto.setNo(no);
+		
+		dto=dao.selectOnePost(dto);
+		
+		model.addAttribute("list",dto);
+		
+		dao.close();
+		
+			return "/InSite/View.jsp?no="+no;
 	}
 	
 	
