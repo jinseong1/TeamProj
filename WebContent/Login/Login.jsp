@@ -52,5 +52,23 @@
 			</div>
 		</div>
 	</div>
+	<!-- 
+	 Members table
+	 ID                                        NOT NULL NVARCHAR2(15)
+	 PASSWORD                                  NOT NULL NVARCHAR2(20)
+	 NAME                                      NOT NULL NVARCHAR2(10)
+	 GENDER                                    NOT NULL NVARCHAR2(10)
+	 TEL                                       NOT NULL NVARCHAR2(15)
+	 LIFEAAGEPLAN                              NOT NULL NVARCHAR2(15)
+	
+	 Post table
+	 
+	  NO                                        NOT NULL NUMBER
+	 ID                                        NOT NULL NVARCHAR2(15)
+	 TITLE                                     NOT NULL NVARCHAR2(50)
+	 POSTDATE                                  NOT NULL DATE
+	 CONTENT                                   NOT NULL NVARCHAR2(1000)
+	 DOWNCOUNT                                          NUMBER
+	 -->
 </body>
 </html>
