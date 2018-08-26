@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-    <title>로그인</title>
+    <title>부트스트랩  템플릿</title>
 	
     <!-- 부트스트랩 -->
     <link href="<c:url value='/Bootstrap/css/bootstrap.min.css'/>" rel="stylesheet">
@@ -24,33 +24,19 @@
     <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
     <script src="<c:url value='/Bootstrap/js/bootstrap.min.js'/>"></script>
     
-    <link rel="stylesheet" href="../BasicCSS/LoginForm.css" type="text/css" />
+    <link href="<c:url value="/BasicCSS/AllCSS.jsp"/>" rel="stylesheet"/>
     
   </head>
-<body id="LoginForm">
-	<div class="container">
-		<h1 class="form-heading">login Form</h1>
-			<div class="login-form">
-			<div class="main-div">
-			<div class="panel">
-			<h2>ParkJinSeong</h2>
-			<p>Please enter your email and password</p>
-			<c:if test="${errorMessage!=null}"><span style="color: red;font-size: 1.3em;font: bold;">${errorMessage}</span></c:if>
-			</div>
-				<form id="Login" action="<c:url value="/Control/MainMove.do"/>" method="post">
-				<div class="form-group">
-					<input type="text" class="form-control" id="userID" name="userID" placeholder="아이디를 입력하여주세요">
-				</div>
-				<div class="form-group">
-					<input type="password" class="form-control" id="userPWD" name="userPWD" placeholder="비밀번호를 입력하여주세요">
-				</div>
-				<div class="forgot">
-					<a href="<c:url value="/Control/SingUpForm.do"/>">회원가입 하시겠습니까?</a>
-				</div>
-				<button type="submit" class="btn btn-primary">Login</button>
-				</form>
-			</div>
-		</div>
+  <body>
+	<jsp:include page="/BasicCSS/InSiteForm.jsp"/>
+	 zzzzzzz
+	 <div class="form-group has-error has-feedback">
+	  <label class="control-label" for="inputError2">Input with error</label>
+	  <input type="text" class="form-control" id="inputError2" aria-describedby="inputError2Status"  />
+	  <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+	  <span id="inputError2Status" class="sr-only">(error)</span>
 	</div>
-</body>
+
+    <jsp:include page="/BasicCSS/Footer.jsp"/>
+  </body>
 </html>

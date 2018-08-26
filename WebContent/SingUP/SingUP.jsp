@@ -35,6 +35,7 @@
 			<div class="panel">
 			<h2>ParkJinSeong</h2>
 			<p>Please enter your Sing Up Member Information</p>
+			<c:if test="${errorMessage!=null}"><span style="color: red;font-size: 1.3em;font: bold;">${errorMessage}</span></c:if>
 			</div>
 				<form id="SingUP" action="<c:url value="/Control/SingUp.do"/>">
 					<div class="form-group">

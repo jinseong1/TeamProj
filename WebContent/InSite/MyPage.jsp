@@ -40,6 +40,7 @@
 	   			<h1>마이페이지  <small>정보수정</small></h1>
 			</div>
 			<div class="row">
+				<c:if test="${errorMessage!=null}"><span style="color: red;font-size: 1.3em;font: bold;">${errorMessage}</span></c:if>
 				<div class="col-md-12">
 					<form class="form-horizontal" method="post" action="<c:url value='/Control/MemberUpdate.do?id=${userID}'/>">
 					  <div class="form-group">

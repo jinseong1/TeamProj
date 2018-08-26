@@ -36,9 +36,31 @@ public class MemberSystem{
 	}
 	
 	@RequestMapping("/Control/SingUp.do")
-	public String singup(@RequestParam Map map)throws Exception{//회원가입 완료 눌렀을 시
+	public String singup(@RequestParam Map map, Model model)throws Exception{//회원가입 완료 눌렀을 시
 		int affected;
 		MemberDTO dto = new MemberDTO();
+		
+		if(map.get("UserID").toString().trim().equals("")) {
+			model.addAttribute("errorMessage", "아이디 입력칸이 비어있습니다");
+			return "/SingUP/SingUP.jsp";			
+		}
+		else if(map.get("UserPWD").toString().trim().equals("")){
+			model.addAttribute("errorMessage", "비밀번호 입력칸이 비어있습니다");
+			return "/SingUP/SingUP.jsp";			
+		}
+		else if(map.get("UserNAME").toString().trim().equals("")){
+			model.addAttribute("errorMessage", "이름 입력칸이 비어있습니다");
+			return "/SingUP/SingUP.jsp";			
+		}
+		else if(map.get("gender")==null){
+			model.addAttribute("errorMessage", "성별이 선택되지 않았습니다");
+			return "/SingUP/SingUP.jsp";			
+		}
+		else if(map.get("UserTEL").toString().trim().equals("")){
+			model.addAttribute("errorMessage", "전화번호 입력칸이 비어있습니다");
+			return "/SingUP/SingUP.jsp";			
+		}
+		
 		
 		dto.setId(map.get("UserID").toString());
 		dto.setPassword(map.get("UserPWD").toString());
@@ -57,16 +79,29 @@ public class MemberSystem{
 			return "/Login/Login.jsp";
 		}
 		else {//회원가입 실패시
+			model.addAttribute("errorMessage", "일치하는 아이디가 있습니다");			
 			return "/SingUP/SingUP.jsp";
 		}
 	}	
 	
 	
 	@RequestMapping("/Control/MainMove.do")
-	public String mainMove(@RequestParam Map map, HttpSession session)throws Exception{//로그인 눌렀을 시
+	public String mainMove(@RequestParam Map map, HttpSession session, Model model)throws Exception{//로그인 눌렀을 시
 		int affected;
-		
 		MemberDTO dto = new MemberDTO();
+		
+		if(map.get("userID").toString().trim().equals("")) {
+			System.out.println("아이디가 비어져있음");
+			model.addAttribute("errorMessage","아이디가 비어있습니다");
+			return "/Login/Login.jsp";
+		}
+		else if(map.get("userPWD").toString().trim().equals("")) {
+			System.out.println("비밀번호가 비어져있음");
+			model.addAttribute("errorMessage","비밀번호가 비어있습니다");
+			return "/Login/Login.jsp";
+		}		
+		
+		
 		
 		dto.setId(map.get("userID").toString());
 		session.setAttribute("userID", map.get("userID").toString());
@@ -84,7 +119,7 @@ public class MemberSystem{
 			
 		}
 		else {//로그인 실패
-			
+			model.addAttribute("errorMessage","아이디나 비밀번호가 일치하지 않습니다.");
 			return "/Login/Login.jsp";
 			
 		}
@@ -162,7 +197,7 @@ public class MemberSystem{
 	
 	
 	@RequestMapping("/Control/WriteEnd.do")
-	public String writeEnd(@RequestParam Map map, HttpSession session)throws Exception{//글등록 완료용
+	public String writeEnd(@RequestParam Map map, HttpSession session,Model model)throws Exception{//글등록 완료용
 		
 		int affected;
 		
@@ -170,8 +205,18 @@ public class MemberSystem{
 		
 		PostDTO dto = new PostDTO();
 		
+		if(map.get("title").toString().trim().equals("")) {
+			model.addAttribute("errorMessage","제목칸이 비어져있습니다");
+			return "/InSite/Write.jsp";
+		}
+		else if(map.get("content").toString().trim().equals("")) {
+			model.addAttribute("errorMessage","내용칸이 비어져있습니다");
+			return "/InSite/Write.jsp";
+		}		
+		
+		
 		dto.setId(session.getAttribute("userID").toString());
-		System.out.println(session.getId());
+		
 		dto.setTitle(map.get("title").toString());
 		
 		dto.setContent(map.get("content").toString());
@@ -184,6 +229,7 @@ public class MemberSystem{
 			return "/Control/NoticeBoard.do?nowPage=1";
 		}
 		else {//입력 실패시
+			model.addAttribute("errorMessage","글 등록이 실패되었습니다");			
 			return "/InSite/Write.jsp";
 		}
 	}
@@ -193,8 +239,6 @@ public class MemberSystem{
 		
 		String no = map.get("no").toString();
 		String nowPage = map.get("nowPage").toString();		
-		
-		
 		
 		DAO dao = new DAO(dataSourceJNDI);
 		
@@ -251,9 +295,21 @@ public class MemberSystem{
 	
 	
 	@RequestMapping("/Control/Update.do")
-	public String update(@RequestParam Map map)throws Exception{//글 수정용
+	public String update(@RequestParam Map map,Model model)throws Exception{//글 수정용
 		
 		int affected;
+		
+		if(map.get("title").toString().trim().equals("")) {
+			model.addAttribute("errorMessage","제목칸이 비어져있습니다");
+			return "/InSite/Write.jsp";
+		}
+		else if(map.get("content").toString().trim().equals("")) {
+			model.addAttribute("errorMessage","내용칸이 비어져있습니다");
+			return "/InSite/Write.jsp";
+		}		
+		
+		
+		
 		String nowPage = map.get("nowPage").toString();
 		DAO dao = new DAO(dataSourceJNDI);
 		
@@ -286,8 +342,24 @@ public class MemberSystem{
 	
 	
 	@RequestMapping("/Control/MemberUpdate.do")
-	public String memberUpdate(@RequestParam Map map)throws Exception{//회원정보 수정
+	public String memberUpdate(@RequestParam Map map,Model model)throws Exception{//회원정보 수정
 		int affected;
+		
+		if(map.get("name").toString().trim().equals("")) {
+			model.addAttribute("errorMessage", "이름 칸이 비어져있습니다");
+			return"/InSite/MyPage.jsp";
+			
+		}
+		else if(map.get("gender").toString().trim().equals("")) {
+			model.addAttribute("errorMessage", "성별이 선택되어 있지 않습니다");			
+			return"/InSite/MyPage.jsp";
+			
+		}		
+		else if(map.get("tel").toString().trim().equals("")) {
+			model.addAttribute("errorMessage", "전화번호 칸이 비어져있습니다");			
+			return"/InSite/MyPage.jsp";
+		}		
+		
 		
 		DAO dao = new DAO(dataSourceJNDI);
 		
@@ -309,12 +381,14 @@ public class MemberSystem{
 		affected=dao.memberUpdate(dto);
 		System.out.println("affected"+affected);
 		System.out.println("수정 커리 문 다음");
+		dao.close();
 		if(affected==1) {
 			System.out.println("수정 성공");
 			return"/Login/Login.jsp";
 		}
 		else {
 			System.out.println("수정 실패");
+			model.addAttribute("errorMessage", "수정이 실패되었습니다");	
 			return"/InSite/MyPage.jsp";
 		}
 	}
