@@ -25,11 +25,51 @@
     <script src="<c:url value='/Bootstrap/js/bootstrap.min.js'/>"></script>
     
     <link href="<c:url value="/BasicCSS/AllCSS.jsp"/>" rel="stylesheet"/>
+    <style type="text/css">
+    .container{
+    margin-top: 70px;
     
+    }
+    
+    
+    </style>
   </head>
   <body>
 	<jsp:include page="/BasicCSS/InSiteForm.jsp"/>
-	 
+	 		<div class="container" >
+			<div class = "page-header">
+	   			<h1>자료실  <small>입력폼</small></h1>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<form class="form-horizontal" method="post" action="<c:url value='/Control/WriteEnd.do'/>">
+					  <div class="form-group">
+					    <label for="name" class="col-sm-2 control-label">작성자</label>
+					    <div class="col-sm-3">
+					       ${userID}
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="title" class="col-sm-2 control-label">제목</label>
+					    <div class="col-sm-5">
+					      <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="content" class="col-sm-2 control-label">내용</label>
+					    <div class="col-sm-5">
+						    <textarea rows="10" type="password" class="form-control" id="content" name="content" placeholder="비밀번호를 입력하세요"></textarea>
+					    </div>
+					  </div>
+					   <div class="form-group">
+					    <div class="col-sm-offset-2 col-sm-10">
+					      <button type="submit" class="btn btn-danger">등록</button>
+					    </div>
+					  </div>
+					</form>
+				</div>
+			</div>	
+		</div>
 
     
   </body>

@@ -25,56 +25,67 @@
     <script src="<c:url value='/Bootstrap/js/bootstrap.min.js'/>"></script>
     
     <link href="<c:url value="/BasicCSS/AllCSS.jsp"/>" rel="stylesheet"/>
-    <style type="text/css">
-    .container{
-    margin-top: 70px;
     
-    }
-    
-    
-    </style>
   </head>
   <body>
 	<jsp:include page="/BasicCSS/InSiteForm.jsp"/>
 	 
-	<!-- 내용 시작 -->
-		<div class="container" >
+	
+			<div class="container" >
 			<div class = "page-header">
-	   			<h1>자료실  <small>목록</small></h1>
+	   			<h1>자료실  <small>상세보기 페이지</small></h1>
 			</div>
-			<div class="row" style="margin-bottom: 10px">
-				<div class="col-md-11 text-right">
-					<a href="<c:url value='/Control/Write.do'/>" class="btn btn-success">등록</a>
-				</div>
-			</div>	
+				
 			<div class="row">
 				<!-- 테이블 전체 가로폭은  테이블을 감싸는 div의 col-*-*로 조정-->
 				<div class="col-md-11">
-			    	<table class="table table-hover table-bordered text-center">
-			    	
-			    		<tr >
-			    			<!-- 각 컬럼의 폭은 <td>계열에 class="col-*-*"추가 -->
-			    			<th class="col-md-1 text-center">번호</th>
-			    			<th class="text-center">제목</th>
-			    			<th class="col-md-1 text-center">작성자</th>
-			    			<th class="col-md-1 text-center">조회수</th>
-			    			<th class="col-md-2 text-center">등록일</th>
-			    		</tr>
-			    		<c:forEach items="${list}" var="record" varStatus="loop">
+			    	<table class="table table-hover table-striped table-bordered ">
 			    		<tr>
-			    			<td>${record.no}</td>
-			    			<td class="text-left">${record.title}</td>
-			    			<td>${record.id}</td>
-			    			<td>${record.downcount}</td>
-			    			<td>${record.postdate}</td>
+			    			<th class="col-md-2 text-center">번호</th>
+			    			<td>${record.no }</td>
 			    		</tr>
-			    		</c:forEach>
+			    		<tr>
+			    			<th class="col-md-2 text-center">제목</th>
+			    			<td>${record.title }</td>
+			    		</tr>
+			    		<tr>
+			    			<th class="col-md-2 text-center">작성자</th>
+			    			<td>${record.name }</td>
+			    		</tr>
+			    		<tr>
+			    			<th class="col-md-2 text-center">조회수</th>
+			    			<td>${record.downcount }</td>
+			    		</tr>
+			    		<tr>
+			    			<th class="col-md-2 text-center">등록일</th>
+			    			<td>${record.postdate }</td>
+			    		</tr>
+			    		<tr>
+			    			<th colspan="2" class="text-center">내용</th>			    			
+			    		</tr>
+			    		<tr>
+			    			<td colspan="2">
+			    				${record.content}
+			    			</td>			    			
+			    		</tr>
+			    		
 			    	</table>
 		    	</div>	
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-md-11">	
+					<!-- .center-block사용시 해당 블락의 크기를 지정하자  -->
+			    	<ul id="tabMenu" class="nav nav-pills center-block" style="width:195px">
+					  <li><a href="#" data-toggle="modal" data-target="#passwordModal">수정</a></li>
+					  <!-- 삭제 취소시에는 모달창이 뜨지 않도록 자스로 제어하기 위해: data-toggle="modal" 삭제 -->
+					  <li><a href="#" data-target="#passwordModal">삭제</a></li>
+					  <li><a href="<c:url value='/DataRoom/List.kosmo'/>">목록</a></li>
+					</ul>
+			    </div>	
 			</div>
-
 		</div>
+	
+	
     
-    <!-- 내용 끝 -->
   </body>
 </html>

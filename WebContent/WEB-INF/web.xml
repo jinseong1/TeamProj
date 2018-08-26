@@ -20,6 +20,15 @@
       <param-name>contextConfigLocation</param-name>
       <param-value>/WEB-INF/Spring/config/*.xml</param-value>
     </init-param>
+    	<!-- ListController의 서블릿 초기화 파라미터-->
+	<init-param>
+		<param-name>PAGESIZE_DATAROOM</param-name>
+		<param-value>5</param-value>
+	</init-param>
+	<init-param>
+		<param-name>BLOCKPAGE_DATAROOM</param-name>
+		<param-value>2</param-value>
+	</init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>

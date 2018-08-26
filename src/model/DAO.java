@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
 import javax.annotation.Resource;
 import javax.naming.Context;
@@ -78,5 +81,71 @@ public class DAO {
 		
 		return affected;
 	}
+	
+	//전체 레코드 수 얻기용- 페이징
+	public int getTotalRecordCount() {
+		int totalCount=0;
+		String sql = "SELECT COUNT(*) FROM POST";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			rs.next();
+			totalCount = rs.getInt(1);
+		} catch (SQLException e) {e.printStackTrace();}
+		return totalCount;
+	}///////
+	
+	
+	public List<PostDTO> selectList(Map map) {
+		List<PostDTO> list = new Vector<PostDTO>();
+		
+		//페이징 적용 전 쿼리
+		//String sql= "SELECT * FROM dataroom ORDER BY postdate DESC";
+		//페이징 적용 쿼리
+		String sql= "SELECT * FROM (SELECT T.*, ROWNUM R FROM (SELECT * FROM post ORDER BY postdate DESC) T) WHERE R BETWEEN ? AND ?";
+		try {
+			psmt=conn.prepareStatement(sql);
+			//시작 및 끝 행번호 설정]
+			psmt.setInt(1, Integer.parseInt(map.get("start").toString()));
+			psmt.setInt(2, Integer.parseInt(map.get("end").toString()));
+			rs= psmt.executeQuery();
+			
+			while(rs.next()) {
+				PostDTO dto = new PostDTO();
+				dto.setNo(rs.getString("no"));
+				dto.setId(rs.getString(2));
+				dto.setTitle(rs.getString(3));
+				dto.setPostdate(rs.getString(4));
+				dto.setContent(rs.getString(5));
+				dto.setDowncount(rs.getString(6));
+				
+				list.add(dto);
+				
+			}///while
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}////////selectList()
+	
+	
+	public int insertPost(PostDTO dto) {//회원가입
+		int affected=0;
+		String sql = "INSERT INTO POST VALUES(SEQ_POST_NO.nextval,?,?,SYSDATE,?,?)";
+		try {			
+			psmt= conn.prepareStatement(sql);
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getTitle());
+			psmt.setString(3, dto.getContent());
+			psmt.setInt(4, 0);
+			
+			affected=psmt.executeUpdate();
+		}
+		catch(SQLException e) {e.printStackTrace();}
+		
+		return affected;
+	}////insert
+	
 	
 }
