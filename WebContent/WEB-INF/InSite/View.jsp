@@ -77,20 +77,29 @@
 			    	</table>
 		    	</div>	
 			</div><!-- row -->
-			<div class="row">
-				<div class="col-md-11">	
-					<!-- .center-block사용시 해당 블락의 크기를 지정하자  -->
-			    	<ul id="tabMenu" class="nav nav-pills center-block" style="width:195px">
-			    	  <c:if test="${sessionScope.userID==list.id}">
-					  <li><a href="<c:url value="/Control/UpdateMove.do?title=${list.title}&content=${list.content}&nowPage=${nowPage}&no=${list.no}"/>">수정</a></li>
-					  <li><a href="<c:url value='/Control/Delete.do?no=${list.no}'/>">삭제</a></li>
+				<div style="position:relative;height:710px;">
+					<div style="right:0px; bottom:0px;text-align: center;" id="comp">
+				      <c:if test="${sessionScope.userID==list.id}">
+				      <a href="<c:url value="/Control/UpdateMove.do?title=${list.title}&content=${list.content}&nowPage=${nowPage}&no=${list.no}"/>">
+					  <button type="button" class="btn btn-primary">수정</button>
+					  </a>
+					  <a href="<c:url value='/Control/Delete.do?no=${list.no}'/>">
+					  <button type="button" class="btn btn-primary">
+					     삭제
+					  </button>
+					  </a>
 					  </c:if>
-					  <li><a href="<c:url value='/Control/NoticeBoard.do?nowPage=${nowPage}'/>">목록</a></li>
-					</ul>
-			    </div>	
-			</div>
+					  <a href="<c:url value='/Control/NoticeBoard.do?nowPage=${nowPage}'/>">
+					  <button type="button" class="btn btn-primary">
+					    목록
+					  </button>
+					  </a>
+					  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</div>
+			    </div>
 		</div>
-	
+	<!--  -->
+	<!--  -->
 		<jsp:include page="/BasicCSS/Footer.jsp"/>
     
   </body>
