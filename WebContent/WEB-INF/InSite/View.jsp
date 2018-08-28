@@ -81,9 +81,10 @@
 				<div class="col-md-11">	
 					<!-- .center-block사용시 해당 블락의 크기를 지정하자  -->
 			    	<ul id="tabMenu" class="nav nav-pills center-block" style="width:195px">
+			    	  <c:if test="${sessionScope.userID==list.id}">
 					  <li><a href="<c:url value="/Control/UpdateMove.do?title=${list.title}&content=${list.content}&nowPage=${nowPage}&no=${list.no}"/>">수정</a></li>
 					  <li><a href="<c:url value='/Control/Delete.do?no=${list.no}'/>">삭제</a></li>
-					  
+					  </c:if>
 					  <li><a href="<c:url value='/Control/NoticeBoard.do?nowPage=${nowPage}'/>">목록</a></li>
 					</ul>
 			    </div>	

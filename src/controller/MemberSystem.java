@@ -22,6 +22,7 @@ import model.MemberDTO;
 import model.PagingUtil;
 import model.PostDTO;
 
+@SessionAttributes("userID")
 @Controller
 public class MemberSystem{
 	List<PostDTO> list =null;
@@ -29,10 +30,15 @@ public class MemberSystem{
 	@Resource(name="dataSourceByJNDI")
 	private DataSource dataSourceJNDI;
 	
+	@RequestMapping("/Control/FirstPage.do")
+	public String loginpage1()throws Exception{//첫페이지 이동
+		System.out.println("여기로 들어옴");
+		return "/WEB-INF/Login/Login.jsp";
+	}	
 	
 	@RequestMapping("/Control/SingUpForm.do")
 	public String singupform()throws Exception{//회원가입 눌렀을 시
-		return "/SingUP/SingUP.jsp";
+		return "/WEB-INF/SingUP/SingUP.jsp";
 	}
 	
 	@RequestMapping("/Control/SingUp.do")
@@ -42,23 +48,23 @@ public class MemberSystem{
 		
 		if(map.get("UserID").toString().trim().equals("")) {
 			model.addAttribute("errorMessage", "아이디 입력칸이 비어있습니다");
-			return "/SingUP/SingUP.jsp";			
+			return "/WEB-INF/SingUP/SingUP.jsp";			
 		}
 		else if(map.get("UserPWD").toString().trim().equals("")){
 			model.addAttribute("errorMessage", "비밀번호 입력칸이 비어있습니다");
-			return "/SingUP/SingUP.jsp";			
+			return "/WEB-INF/SingUP/SingUP.jsp";			
 		}
 		else if(map.get("UserNAME").toString().trim().equals("")){
 			model.addAttribute("errorMessage", "이름 입력칸이 비어있습니다");
-			return "/SingUP/SingUP.jsp";			
+			return "/WEB-INF/SingUP/SingUP.jsp";			
 		}
 		else if(map.get("gender")==null){
 			model.addAttribute("errorMessage", "성별이 선택되지 않았습니다");
-			return "/SingUP/SingUP.jsp";			
+			return "/WEB-INF/SingUP/SingUP.jsp";			
 		}
 		else if(map.get("UserTEL").toString().trim().equals("")){
 			model.addAttribute("errorMessage", "전화번호 입력칸이 비어있습니다");
-			return "/SingUP/SingUP.jsp";			
+			return "/WEB-INF/SingUP/SingUP.jsp";			
 		}
 		
 		
@@ -76,11 +82,11 @@ public class MemberSystem{
 		dao.close();
 		
 		if(affected==1) {//회원가입 성공 시
-			return "/Login/Login.jsp";
+			return "/WEB-INF/Login/Login.jsp";
 		}
 		else {//회원가입 실패시
 			model.addAttribute("errorMessage", "일치하는 아이디가 있습니다");			
-			return "/SingUP/SingUP.jsp";
+			return "/WEB-INF/SingUP/SingUP.jsp";
 		}
 	}	
 	
@@ -93,12 +99,12 @@ public class MemberSystem{
 		if(map.get("userID").toString().trim().equals("")) {
 			System.out.println("아이디가 비어져있음");
 			model.addAttribute("errorMessage","아이디가 비어있습니다");
-			return "/Login/Login.jsp";
+			return "/WEB-INF/Login/Login.jsp";
 		}
 		else if(map.get("userPWD").toString().trim().equals("")) {
 			System.out.println("비밀번호가 비어져있음");
 			model.addAttribute("errorMessage","비밀번호가 비어있습니다");
-			return "/Login/Login.jsp";
+			return "/WEB-INF/Login/Login.jsp";
 		}		
 		
 		
@@ -115,12 +121,12 @@ public class MemberSystem{
 		
 		if(affected==1) {//로그인 성공
 			
-			return "/InSite/Main.jsp";
+			return "/WEB-INF/InSite/Main.jsp";
 			
 		}
 		else {//로그인 실패
 			model.addAttribute("errorMessage","아이디나 비밀번호가 일치하지 않습니다.");
-			return "/Login/Login.jsp";
+			return "/WEB-INF/Login/Login.jsp";
 			
 		}
 	}
@@ -128,7 +134,7 @@ public class MemberSystem{
 	
 	@RequestMapping("/Control/Main.do")
 	public String main()throws Exception{//Main화면으로 이동
-			return "/InSite/Main.jsp";
+			return "/WEB-INF/InSite/Main.jsp";
 	}
 	
 	
@@ -137,15 +143,16 @@ public class MemberSystem{
 		
 		status.setComplete();
 		
-		return "/Login/Login.jsp";
+		return "/WEB-INF/Login/Login.jsp";
 	}
 	
 
 	
 	
 	@RequestMapping("/Control/NoticeBoard.do")
-	public String noticeBoard(@RequestParam int nowPage,Map map, HttpServletRequest req)throws Exception{//게시판으로 이동
+	public String noticeBoard(@RequestParam int nowPage,Map map, HttpServletRequest req, @ModelAttribute("userID")String id)throws Exception{//게시판으로 이동
 		Map rownum = new HashMap();
+		map.put("id", id);
 		DAO dao = new DAO(dataSourceJNDI);
 		//전체 레코드 수
 		int totalRecordCount = dao.getTotalRecordCount();
@@ -183,7 +190,7 @@ public class MemberSystem{
 		map.put("list", list);
 		
 		
-		return "/InSite/NoticeBoard.jsp?nowPage="+nowPage;
+		return "/WEB-INF/InSite/NoticeBoard.jsp?nowPage="+nowPage;
 	}
 
 	
@@ -192,7 +199,7 @@ public class MemberSystem{
 		
 		map.put("userID", session.getAttribute("userID"));
 		
-		return "/InSite/Write.jsp";
+		return "/WEB-INF/InSite/Write.jsp";
 	}
 	
 	
@@ -207,11 +214,11 @@ public class MemberSystem{
 		
 		if(map.get("title").toString().trim().equals("")) {
 			model.addAttribute("errorMessage","제목칸이 비어져있습니다");
-			return "/InSite/Write.jsp";
+			return "/WEB-INF/InSite/Write.jsp";
 		}
 		else if(map.get("content").toString().trim().equals("")) {
 			model.addAttribute("errorMessage","내용칸이 비어져있습니다");
-			return "/InSite/Write.jsp";
+			return "/WEB-INF/InSite/Write.jsp";
 		}		
 		
 		
@@ -230,7 +237,7 @@ public class MemberSystem{
 		}
 		else {//입력 실패시
 			model.addAttribute("errorMessage","글 등록이 실패되었습니다");			
-			return "/InSite/Write.jsp";
+			return "/WEB-INF/InSite/Write.jsp";
 		}
 	}
 	
@@ -253,7 +260,7 @@ public class MemberSystem{
 		
 		dao.close();
 		
-			return "/InSite/View.jsp?no="+no;
+			return "/WEB-INF/InSite/View.jsp?no="+no;
 	}
 	
 	@RequestMapping("/Control/Delete.do")
@@ -279,7 +286,7 @@ public class MemberSystem{
 			return "/Control/NoticeBoard.do?nowPage=1";
 		}
 		else {//삭제 실패시
-			return "/InSite/View.jsp?no="+no;
+			return "/WEB-INF/InSite/View.jsp?no="+no;
 		}
 	}
 	
@@ -289,7 +296,7 @@ public class MemberSystem{
 		
 		model.addAllAttributes(map);
 		
-		return "/InSite/Update.jsp";
+		return "/WEB-INF/InSite/Update.jsp";
 	}
 	
 	
@@ -301,11 +308,11 @@ public class MemberSystem{
 		
 		if(map.get("title").toString().trim().equals("")) {
 			model.addAttribute("errorMessage","제목칸이 비어져있습니다");
-			return "/InSite/Write.jsp";
+			return "/WEB-INF/InSite/Write.jsp";
 		}
 		else if(map.get("content").toString().trim().equals("")) {
 			model.addAttribute("errorMessage","내용칸이 비어져있습니다");
-			return "/InSite/Write.jsp";
+			return "/WEB-INF/InSite/Write.jsp";
 		}		
 		
 		
@@ -329,14 +336,14 @@ public class MemberSystem{
 			return "/Control/ViewMove.do?nowPage="+nowPage;
 		}
 		else {//입력 실패시
-			return "/InSite/Write.jsp";
+			return "/WEB-INF/InSite/Write.jsp";
 		}
 	}	
 	
 	@RequestMapping("/Control/MyPage.do")
 	public String myPageMove()throws Exception{//MyPage로 이동
 		
-		return "/InSite/MyPage.jsp";
+		return "/WEB-INF/InSite/MyPage.jsp";
 	}
 	
 	
@@ -347,17 +354,17 @@ public class MemberSystem{
 		
 		if(map.get("name").toString().trim().equals("")) {
 			model.addAttribute("errorMessage", "이름 칸이 비어져있습니다");
-			return"/InSite/MyPage.jsp";
+			return"/WEB-INF/InSite/MyPage.jsp";
 			
 		}
 		else if(map.get("gender").toString().trim().equals("")) {
 			model.addAttribute("errorMessage", "성별이 선택되어 있지 않습니다");			
-			return"/InSite/MyPage.jsp";
+			return"/WEB-INF/InSite/MyPage.jsp";
 			
 		}		
 		else if(map.get("tel").toString().trim().equals("")) {
 			model.addAttribute("errorMessage", "전화번호 칸이 비어져있습니다");			
-			return"/InSite/MyPage.jsp";
+			return"/WEB-INF/InSite/MyPage.jsp";
 		}		
 		
 		
@@ -384,12 +391,12 @@ public class MemberSystem{
 		dao.close();
 		if(affected==1) {
 			System.out.println("수정 성공");
-			return"/Login/Login.jsp";
+			return"/WEB-INF/Login/Login.jsp";
 		}
 		else {
 			System.out.println("수정 실패");
 			model.addAttribute("errorMessage", "수정이 실패되었습니다");	
-			return"/InSite/MyPage.jsp";
+			return"/WEB-INF/InSite/MyPage.jsp";
 		}
 	}
 	

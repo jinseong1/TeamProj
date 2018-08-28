@@ -24,8 +24,8 @@
     <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
     <script src="<c:url value='/Bootstrap/js/bootstrap.min.js'/>"></script>
     
-    <link rel="stylesheet" href="../BasicCSS/LoginForm.css" type="text/css" />
-    
+	<link rel="stylesheet" href="../BasicCSS/LoginForm.css" type="text/css"/>
+
   </head>
 <body id="LoginForm">
 	<div class="container">
