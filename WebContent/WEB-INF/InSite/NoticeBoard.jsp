@@ -71,7 +71,7 @@
 			    		</tr>
 			    		<c:forEach items="${list}" var="record" varStatus="loop">
 			    		<tr>
-			    			<td>${record.no}</td>
+			    			<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>	
 			    			<td class="text-left"><a href='<c:url value="/Control/ViewMove.do?no=${record.no}&nowPage=${nowPage}"/>'>${record.title}</a></td>
 			    			<td>${record.id}</td>
 			    			<td>${record.downcount}</td>
